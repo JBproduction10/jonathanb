@@ -6,11 +6,18 @@ export default function Hero({ site }: { site: Site }) {
 
   return (
     <section id="main" className="relative pt-40 pb-20 overflow-hidden">
-      {/* decorative corner outlines */}
-      <div className="pointer-events-none absolute -left-10 top-24 h-28 w-28 rounded-3xl border border-base-700/70 hidden sm:block" />
-      <div className="pointer-events-none absolute -right-12 top-44 h-16 w-16 rounded-2xl border border-base-700/70 hidden sm:block" />
+      {/* animated ambient glow, sits behind everything else in the hero */}
+      <div className="hero-glow" aria-hidden="true">
+        <span className="blob-a" />
+        <span className="blob-b" />
+        <span className="blob-c" />
+      </div>
 
-      <div className="section-shell relative flex flex-col items-center text-center">
+      {/* decorative corner outlines */}
+      <div className="pointer-events-none absolute -left-10 top-24 h-28 w-28 rounded-3xl border border-base-700/70 hidden sm:block z-10" />
+      <div className="pointer-events-none absolute -right-12 top-44 h-16 w-16 rounded-2xl border border-base-700/70 hidden sm:block z-10" />
+
+      <div className="section-shell relative z-10 flex flex-col items-center text-center">
         {site.availableForWork && (
           <div className="inline-flex items-center gap-2 rounded-full card-border bg-base-900 px-4 py-1.5 text-xs text-white/70 mb-8">
             <span className="relative flex h-2 w-2">
