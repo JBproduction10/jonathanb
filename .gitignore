@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # dependencies
 /node_modules
 
@@ -14,36 +13,10 @@
 *.pem
 .env*.local
 .env
-
+/data/
 # vercel
 .vercel
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-=======
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-
-node_modules
-dist
-dist-ssr
-*.local
-
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
->>>>>>> 0afba6c635c5584ecf85426ed1f16ab9e14cec39
