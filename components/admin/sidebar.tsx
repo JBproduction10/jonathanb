@@ -11,6 +11,7 @@ import {
   Trophy,
   History,
   Mail,
+  Send,
   LogOut,
   Globe,
 } from "lucide-react";
@@ -23,6 +24,7 @@ const links = [
   { href: "/admin/strengths", label: "Strengths", icon: Trophy },
   { href: "/admin/timeline", label: "Timeline", icon: History },
   { href: "/admin/messages", label: "Messages", icon: Mail },
+  { href: "/admin/email-settings", label: "Email Settings", icon: Send },
 ];
 
 export default function Sidebar() {
