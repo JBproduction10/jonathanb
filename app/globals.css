@@ -1,0 +1,200 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #050608;
+  color: #e7e9f0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+::selection {
+  background-color: rgba(91, 140, 255, 0.35);
+  color: #ffffff;
+}
+
+.section-shell {
+  max-width: 1120px;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .section-shell {
+    padding-inline: 2.5rem;
+  }
+}
+
+.eyebrow {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #5ea6ff;
+}
+
+.card-border {
+  border: 1px solid #1b1e2a;
+}
+
+/* Shared form control style used across the admin dashboard. */
+.input {
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid #1b1e2a;
+  background-color: #101218;
+  padding: 0.65rem 1rem;
+  font-size: 0.875rem;
+  color: #ffffff;
+}
+.input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+.input:focus {
+  outline: none;
+  border-color: #2f8fff;
+}
+
+/* ---------------------------------------------------------------------
+   Light theme
+   The site is designed dark-first: every component uses solid dark
+   utility classes (bg-base-900, text-white/50, ...) rather than Tailwind's
+   `dark:` variant. Toggling the `.light` class on <html> (see navbar.tsx
+   and the inline script in layout.tsx) swaps those utilities for a light
+   palette here, so no component markup has to branch on theme state.
+   ------------------------------------------------------------------- */
+
+.light body {
+  background-color: #f8fafc;
+  color: #0f172a;
+  background-image: radial-gradient(rgba(15, 23, 42, 0.07) 1px, transparent 1px);
+}
+
+.light ::selection {
+  background-color: rgba(47, 143, 255, 0.25);
+  color: #0f172a;
+}
+
+.light .card-border {
+  border-color: #e2e8f0;
+}
+
+.light .bg-base-900 {
+  background-color: #ffffff !important;
+}
+
+.light .bg-base-800 {
+  background-color: #f1f5f9 !important;
+}
+
+.light .bg-base-950 {
+  background-color: #f8fafc !important;
+}
+
+.light .bg-base-950\/85 {
+  background-color: rgba(255, 255, 255, 0.85) !important;
+}
+
+.light .bg-base-950\/95 {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+}
+
+.light .border-base-700,
+.light .border-base-800 {
+  border-color: #e2e8f0 !important;
+}
+
+.light .border-base-700\/70 {
+  border-color: rgba(226, 232, 240, 0.8) !important;
+}
+
+.light .text-white {
+  color: #0f172a !important;
+}
+
+.light .text-white\/80 {
+  color: rgba(15, 23, 42, 0.82) !important;
+}
+
+.light .text-white\/70 {
+  color: rgba(15, 23, 42, 0.72) !important;
+}
+
+.light .text-white\/60 {
+  color: rgba(15, 23, 42, 0.64) !important;
+}
+
+.light .text-white\/55 {
+  color: rgba(15, 23, 42, 0.6) !important;
+}
+
+.light .text-white\/50 {
+  color: rgba(15, 23, 42, 0.56) !important;
+}
+
+.light .text-white\/45 {
+  color: rgba(15, 23, 42, 0.52) !important;
+}
+
+.light .text-white\/40 {
+  color: rgba(15, 23, 42, 0.48) !important;
+}
+
+.light .text-white\/35 {
+  color: rgba(15, 23, 42, 0.42) !important;
+}
+
+.light .text-white\/30 {
+  color: rgba(15, 23, 42, 0.38) !important;
+}
+
+.light .placeholder\:text-white\/30::placeholder {
+  color: rgba(15, 23, 42, 0.35) !important;
+}
+
+.light .hover\:text-white:hover {
+  color: #0f172a !important;
+}
+
+.light .hover\:text-white\/60:hover {
+  color: rgba(15, 23, 42, 0.64) !important;
+}
+
+.light .group:hover .group-hover\:text-white\/70 {
+  color: rgba(15, 23, 42, 0.72) !important;
+}
+
+.light .hover\:border-white\/30:hover {
+  border-color: rgba(15, 23, 42, 0.22) !important;
+}
+
+.light .hover\:border-white\/25:hover {
+  border-color: rgba(15, 23, 42, 0.18) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid #5b8cff;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
