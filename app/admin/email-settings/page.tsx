@@ -13,6 +13,7 @@ export default function AdminEmailSettingsPage() {
   const [form, setForm] = useState<any>(null);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
   const [testing, setTesting] = useState(false);
   const [testResult, setTestResult] = useState<{ ok: boolean; message: string } | null>(null);
 
@@ -37,6 +38,7 @@ export default function AdminEmailSettingsPage() {
     e.preventDefault();
     setSaving(true);
     setSaved(false);
+    setSaveError(null);
     setTestResult(null);
     const res = await fetch("/api/admin/email-settings", {
       method: "PUT",
@@ -54,6 +56,9 @@ export default function AdminEmailSettingsPage() {
         resend: { apiKey: "" },
       }));
       setTimeout(() => setSaved(false), 2000);
+    } else {
+      const data = await res.json().catch(() => null);
+      setSaveError(data?.error || `Save failed (${res.status}).`);
     }
   }
 
@@ -246,6 +251,8 @@ export default function AdminEmailSettingsPage() {
           </button>
           {saved && <span className="text-sm text-emerald-400">Saved.</span>}
         </div>
+
+        {saveError && <p className="text-sm text-red-400">{saveError}</p>}
 
         {testResult && (
           <p className={`text-sm ${testResult.ok ? "text-emerald-400" : "text-red-400"}`}>
