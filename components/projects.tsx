@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { ExternalLink, Github } from "lucide-react";
-import type { Project } from "@/data/projects";
+import type { Project } from "@/types/content";
 
 function ProjectMedia({ project }: { project: Project }) {
   const frame = (

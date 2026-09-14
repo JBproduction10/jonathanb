@@ -1,4 +1,4 @@
-import type { Site } from "@/data/site";
+import type { Site } from "@/types/content";
 
 export default function Footer({ site }: { site: Site }) {
   const year = new Date().getFullYear();

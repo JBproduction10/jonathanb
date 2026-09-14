@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import { site } from "@/data/site";
+import { getSite } from "@/lib/data";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -15,28 +15,31 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: `${site.name} — ${site.role}`,
-  description: site.description,
-  keywords: [
-    "Frontend Developer",
-    "React",
-    "Next.js",
-    "TypeScript",
-    "Web Developer",
-    site.name,
-  ],
-  openGraph: {
+export async function generateMetadata(): Promise<Metadata> {
+  const site = await getSite();
+  return {
     title: `${site.name} — ${site.role}`,
-    description: site.tagline,
-    type: "website",
-  },
-  twitter: {
-    card: "summary",
-    title: `${site.name} — ${site.role}`,
-    description: site.tagline,
-  },
-};
+    description: site.description,
+    keywords: [
+      "Frontend Developer",
+      "React",
+      "Next.js",
+      "TypeScript",
+      "Web Developer",
+      site.name,
+    ],
+    openGraph: {
+      title: `${site.name} — ${site.role}`,
+      description: site.tagline,
+      type: "website",
+    },
+    twitter: {
+      card: "summary",
+      title: `${site.name} — ${site.role}`,
+      description: site.tagline,
+    },
+  };
+}
 
 // Runs before hydration so the correct theme is applied on first paint
 // (avoids a flash of the wrong theme).

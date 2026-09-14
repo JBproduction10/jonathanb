@@ -1,4 +1,4 @@
-import type { SkillGroup } from "@/data/skills";
+import type { SkillGroup } from "@/types/content";
 
 export default function Skills({ groups }: { groups: SkillGroup[] }) {
   return (

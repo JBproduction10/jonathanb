@@ -1,6 +1,6 @@
 import { Briefcase, GraduationCap, Download } from "lucide-react";
-import type { TimelineEntry } from "@/data/timeline";
-import type { Site } from "@/data/site";
+import type { TimelineEntry } from "@/types/content";
+import type { Site } from "@/types/content";
 
 export default function WorkEducation({
   entries,

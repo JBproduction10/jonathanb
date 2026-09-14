@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { Github, Linkedin, Mail, ArrowRight, Send } from "lucide-react";
-import type { Site } from "@/data/site";
+import type { Site } from "@/types/content";
 
 type Status = "idle" | "loading" | "success" | "error";
 

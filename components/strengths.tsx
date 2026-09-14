@@ -1,5 +1,5 @@
 import { Zap, Eye, LayoutPanelLeft, Target, Clock } from "lucide-react";
-import type { Strength } from "@/data/strengths";
+import type { Strength } from "@/types/content";
 
 // Icons map 1:1 with the order of data/strengths.ts. If you reorder or add
 // entries there, keep this array in sync (falls back to Zap otherwise).

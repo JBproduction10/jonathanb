@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Menu, X, Moon, Sun } from "lucide-react";
-import type { Site } from "@/data/site";
+import type { Site } from "@/types/content";
 
 const navLinks = [
   { href: "#about", label: "About" },

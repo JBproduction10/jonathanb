@@ -1,4 +1,4 @@
-import type { Site } from "@/data/site";
+import type { Site } from "@/types/content";
 
 export default function About({ site }: { site: Site }) {
   const { about } = site;

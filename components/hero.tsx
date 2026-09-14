@@ -1,5 +1,5 @@
 import { Github, ChevronDown } from "lucide-react";
-import type { Site } from "@/data/site";
+import type { Site } from "@/types/content";
 
 export default function Hero({ site }: { site: Site }) {
   const [line1, line2, line3] = site.heroHeadline;

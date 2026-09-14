@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/mongodb";
 import SiteSettings from "@/lib/models/SiteSettings";
 import { requireAdmin } from "@/lib/requireAdmin";
-import { site as staticSite } from "@/data/site";
+import { emptySite } from "@/lib/data";
 
 export async function GET() {
   const unauthorized = await requireAdmin();
@@ -10,7 +10,7 @@ export async function GET() {
 
   await connectDB();
   const doc = await SiteSettings.findOne();
-  if (!doc) return NextResponse.json(staticSite);
+  if (!doc) return NextResponse.json(emptySite);
   return NextResponse.json(doc);
 }
 
