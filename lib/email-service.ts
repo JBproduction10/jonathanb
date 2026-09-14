@@ -80,7 +80,10 @@ export function clearEmailServiceCache(): void {
   emailService.clearCache();
 }
 
-export async function sendEmail({ to, subject, html }: EmailOptions) {
+export async function sendEmail(
+  { to, subject, html }: EmailOptions,
+  opts?: { force?: boolean }
+) {
   if (!emailService.isInitialized()) {
     await initializeEmailService();
   }
@@ -90,9 +93,15 @@ export async function sendEmail({ to, subject, html }: EmailOptions) {
     throw new Error("Email settings not configured. Configure them in /admin/email-settings.");
   }
 
-  if (settings.testMode) {
+  if (settings.testMode && !opts?.force) {
     console.log("TEST MODE: email would be sent to:", to, "| subject:", subject);
     return { messageId: "test-mode-" + Date.now() };
+  }
+
+  if (!emailService.isInitialized()) {
+    throw new Error(
+      `Email provider "${settings.provider}" failed to initialize — check the credentials saved in /admin/email-settings.`
+    );
   }
 
   const result = await emailService.send({ to, subject, html });

@@ -20,29 +20,22 @@ export async function POST() {
     );
   }
 
+  if (!settings.adminEmail) {
+    return NextResponse.json(
+      { error: "Set \"Send notifications to\" before sending a test email." },
+      { status: 400 }
+    );
+  }
+
   try {
-    if (settings.testMode) {
-      // Send for real even in test mode, so "Send test email" actually tests.
-      const { emailService } = await import("@/lib/email");
-      if (!emailService.isInitialized()) {
-        return NextResponse.json({ error: "Email provider not initialized." }, { status: 500 });
-      }
-      const result = await emailService.send({
+    const result = await sendEmail(
+      {
         to: settings.adminEmail,
         subject: "Test email from your portfolio",
         html: `<p>This is a test email sent via the <strong>${settings.provider}</strong> provider. If you're reading this, it works.</p>`,
-      });
-      if (!result.success) {
-        return NextResponse.json({ error: result.error || "Send failed." }, { status: 500 });
-      }
-      return NextResponse.json({ ok: true, messageId: result.messageId });
-    }
-
-    const result = await sendEmail({
-      to: settings.adminEmail,
-      subject: "Test email from your portfolio",
-      html: `<p>This is a test email sent via the <strong>${settings.provider}</strong> provider. If you're reading this, it works.</p>`,
-    });
+      },
+      { force: true }
+    );
     return NextResponse.json({ ok: true, messageId: result.messageId });
   } catch (err) {
     return NextResponse.json(
