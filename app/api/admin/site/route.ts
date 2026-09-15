@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { connectDB } from "@/lib/mongodb";
 import SiteSettings from "@/lib/models/SiteSettings";
 import { requireAdmin } from "@/lib/requireAdmin";
@@ -29,5 +30,6 @@ export async function PUT(request: Request) {
     upsert: true,
     runValidators: true,
   });
+  revalidatePath("/");
   return NextResponse.json(doc);
 }

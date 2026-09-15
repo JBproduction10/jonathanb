@@ -98,6 +98,54 @@ export default function AdminSitePage() {
               onChange={(e) => set("about.paragraphs", e.target.value.split("\n"))}
             />
           </Field>
+          <Field label="Stats (the numbers shown in the About panel, e.g. &quot;5+ / Years experience&quot;)">
+            <div className="space-y-3">
+              {form.about.stats.map((stat: { value: string; label: string }, i: number) => (
+                <div key={i} className="flex gap-2">
+                  <input
+                    className="input"
+                    placeholder="Value (e.g. 5+)"
+                    value={stat.value}
+                    onChange={(e) => {
+                      const next = [...form.about.stats];
+                      next[i] = { ...next[i], value: e.target.value };
+                      set("about.stats", next);
+                    }}
+                  />
+                  <input
+                    className="input"
+                    placeholder="Label (e.g. Years experience)"
+                    value={stat.label}
+                    onChange={(e) => {
+                      const next = [...form.about.stats];
+                      next[i] = { ...next[i], label: e.target.value };
+                      set("about.stats", next);
+                    }}
+                  />
+                  <button
+                    type="button"
+                    onClick={() =>
+                      set(
+                        "about.stats",
+                        form.about.stats.filter((_: unknown, idx: number) => idx !== i)
+                      )
+                    }
+                    aria-label="Remove stat"
+                    className="shrink-0 rounded-lg card-border px-3 text-white/40 hover:text-red-400 hover:border-red-400/40 transition-colors"
+                  >
+                    ✕
+                  </button>
+                </div>
+              ))}
+              <button
+                type="button"
+                onClick={() => set("about.stats", [...form.about.stats, { value: "", label: "" }])}
+                className="text-sm text-accent hover:text-accent-soft transition-colors"
+              >
+                + Add stat
+              </button>
+            </div>
+          </Field>
           <Field label="Core values (comma separated)">
             <input
               className="input"

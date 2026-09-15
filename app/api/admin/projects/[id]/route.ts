@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { connectDB } from "@/lib/mongodb";
 import Project from "@/lib/models/Project";
 import { requireAdmin } from "@/lib/requireAdmin";
@@ -17,6 +18,7 @@ export async function PUT(request: Request, { params }: { params: { id: string }
     runValidators: true,
   });
   if (!doc) return NextResponse.json({ error: "Project not found." }, { status: 404 });
+  revalidatePath("/");
   return NextResponse.json(doc);
 }
 
@@ -37,5 +39,6 @@ export async function DELETE(_request: Request, { params }: { params: { id: stri
     }
   }
 
+  revalidatePath("/");
   return NextResponse.json({ ok: true });
 }

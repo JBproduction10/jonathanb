@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { connectDB } from "@/lib/mongodb";
 import Timeline from "@/lib/models/Timeline";
 import { requireAdmin } from "@/lib/requireAdmin";
@@ -24,5 +25,6 @@ export async function POST(request: Request) {
   await connectDB();
   const count = await Timeline.countDocuments();
   const doc = await Timeline.create({ ...body, order: body.order ?? count });
+  revalidatePath("/");
   return NextResponse.json(doc, { status: 201 });
 }

@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { connectDB } from "@/lib/mongodb";
 import SkillGroup from "@/lib/models/SkillGroup";
 import { requireAdmin } from "@/lib/requireAdmin";
@@ -21,5 +22,6 @@ export async function POST(request: Request) {
   await connectDB();
   const count = await SkillGroup.countDocuments();
   const doc = await SkillGroup.create({ ...body, order: body.order ?? count });
+  revalidatePath("/");
   return NextResponse.json(doc, { status: 201 });
 }

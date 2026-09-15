@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { connectDB } from "@/lib/mongodb";
 import Project from "@/lib/models/Project";
 import { requireAdmin } from "@/lib/requireAdmin";
@@ -28,6 +29,7 @@ export async function POST(request: Request) {
   try {
     const count = await Project.countDocuments();
     const doc = await Project.create({ ...body, order: body.order ?? count });
+    revalidatePath("/");
     return NextResponse.json(doc, { status: 201 });
   } catch (err: any) {
     if (err?.code === 11000) {
