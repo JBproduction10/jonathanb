@@ -1,6 +1,12 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import { ExternalLink, Github } from "lucide-react";
 import type { Project } from "@/types/content";
+import Pagination from "./pagination";
+
+const PAGE_SIZE = 4;
 
 function ProjectMedia({ project }: { project: Project }) {
   const frame = (
@@ -58,6 +64,10 @@ function ProjectMedia({ project }: { project: Project }) {
 }
 
 export default function Projects({ projects }: { projects: Project[] }) {
+  const [page, setPage] = useState(0);
+  const totalPages = Math.max(1, Math.ceil(projects.length / PAGE_SIZE));
+  const visible = projects.slice(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE);
+
   return (
     <section id="projects" className="py-24 border-t border-base-800">
       <div className="section-shell">
@@ -72,8 +82,9 @@ export default function Projects({ projects }: { projects: Project[] }) {
         </div>
 
         <div className="mt-16 flex flex-col gap-20">
-          {projects.map((project, i) => {
-            const reversed = i % 2 === 1;
+          {visible.map((project, i) => {
+            const globalIndex = page * PAGE_SIZE + i;
+            const reversed = globalIndex % 2 === 1;
             return (
               <article
                 key={project.slug}
@@ -131,6 +142,12 @@ export default function Projects({ projects }: { projects: Project[] }) {
             );
           })}
         </div>
+
+        {totalPages > 1 && (
+          <div className="mt-16">
+            <Pagination page={page} totalPages={totalPages} onChange={setPage} />
+          </div>
+        )}
       </div>
     </section>
   );
